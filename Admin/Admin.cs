@@ -12,105 +12,147 @@ using MySql.Data.MySqlClient;
 namespace Admin
 {
     public partial class Admin : Form
-
     {
-        string _connectionString = "server=127.0.0.1;user id = root; persistsecurityinfo=True;database=ppe";
-        public Admin(String NiveauUtilisateur, String LeNomutilisateur)
+        public Admin()
         {
             InitializeComponent();
-            label2.Text = LeNomutilisateur;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-           
-            MySqlConnection conn = new MySqlConnection(_connectionString);
-            try
+        List<Utilisateurs> lesutilisateurs = new List<Utilisateurs>();
+        List<Salon> lessalons = new List<Salon>();
 
+        MySqlConnection conn = null;
+
+        private void load_utilisateurs()
+        {
+            lesutilisateurs.Clear();
+
+            string sql = "SELECT id, nom, prenom, pseudo, email, date_inscription FROM utilisateurs";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
             {
-                conn.Open();
-                string sql = "Select * FROM user ;";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader(); //Curseur
-                while (rdr.Read())
-                {
-                    if (GridUsers.Columns.Count == 0)
-                    {
-                        //rb.AppendText(rdr[0] + " -- " + rdr[1] + " -- " + rdr[2] + " -- " + rdr[3]);
-                        //rb.AppendText(rdr[0].ToString());
-                        GridUsers.Columns.Add("prenom", "Prenom");
-                        GridUsers.Columns.Add("nom", "Nom");
-
-                    }
-                    GridUsers.Rows.Add(rdr[1], rdr[2]);
-                }
-
+                Utilisateurs UtilisateursView = new Utilisateurs(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), DateTime.Parse(rdr[5].ToString()));
+                lesutilisateurs.Add(UtilisateursView);
             }
-            catch (Exception ex)
+            rdr.Close();
+
+            dataGridViewUsers.DataSource = null;
+            dataGridViewUsers.DataSource = lesutilisateurs;
+
+        }
+
+        private void load_salons()
+        {
+            //
+        }
+
+        private void Admin_Load(object sender, EventArgs e)
+        {
+            conn = Database.openConnection();
+            load_utilisateurs();
+            load_salons();
+        }
+
+        private void buttonAddUsers_Click(object sender, EventArgs e)
+        {
+            InsertUser insertion = new InsertUser();
+            insertion.ShowDialog();
+
+            if (insertion.DialogResult == DialogResult.OK)
             {
-                MessageBox.Show(ex.ToString());
+                insertion.Close();
+                conn = Database.openConnection();
+                load_utilisateurs();
+                return;
             }
-            conn.Close(); //Fermer la connexion
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+            lesutilisateurs.Clear();
 
-        }
+            string sql = "SELECT id, nom, prenom, pseudo, email, date_inscription FROM utilisateurs";
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            Utilisateur MonFormUtilisateur = new Utilisateur();
-            MonFormUtilisateur.ShowDialog();
-            if (MonFormUtilisateur.DialogResult == DialogResult.OK)
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
             {
-                GridUsers.Rows.Add(MonFormUtilisateur.StrPrenomUtilisateur, MonFormUtilisateur.StrNomUtilisateur);
+                Utilisateurs UtilisateursView = new Utilisateurs(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), DateTime.Parse(rdr[5].ToString()));
+                lesutilisateurs.Add(UtilisateursView);
             }
-            else
-                MonFormUtilisateur.Close();
+            rdr.Close();
+
+            dataGridViewUsers.DataSource = null;
+            dataGridViewUsers.DataSource = lesutilisateurs;
+
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void buttonEditUser_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in GridUsers.SelectedRows)
+            UpdateUser update = new UpdateUser();
+            update.ShowDialog();
+
+            if (update.DialogResult == DialogResult.OK)
             {
-
-                string idDemande = GridUsers.Rows[row.Index].Cells[0].Value.ToString();
-                Utilisateur MonFormUtilisateur = new Utilisateur(idDemande);
-                MonFormUtilisateur.ShowDialog();
-                if (MonFormUtilisateur.DialogResult == DialogResult.OK)
-                {
-
-                }
-                else
-                    MonFormUtilisateur.Close();
+                update.Close();
+                conn = Database.openConnection();
+                load_utilisateurs();
+                return;
             }
-        }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            foreach (DataGridViewRow row in GridUsers.SelectedRows)
+            lesutilisateurs.Clear();
+
+            string sql = "SELECT id, nom, prenom, pseudo, email, date_inscription FROM utilisateurs";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
             {
-                GridUsers.Rows.RemoveAt(row.Index);
+                Utilisateurs UtilisateursView = new Utilisateurs(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), DateTime.Parse(rdr[5].ToString()));
+                lesutilisateurs.Add(UtilisateursView);
             }
+            rdr.Close();
+
+            dataGridViewUsers.DataSource = null;
+            dataGridViewUsers.DataSource = lesutilisateurs;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // Bouton supprimer
         {
+            DeleteUser delete = new DeleteUser();
+            delete.ShowDialog();
 
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            Utilisateur MonFormUtilisateur = new Utilisateur();
-            MonFormUtilisateur.ShowDialog();
-            if (MonFormUtilisateur.DialogResult == DialogResult.OK)
+            if (delete.DialogResult == DialogResult.OK)
             {
-                GridUsers.Rows.Add(MonFormUtilisateur.StrPrenomUtilisateur, MonFormUtilisateur.StrNomUtilisateur);
+                delete.Close();
+                conn = Database.openConnection();
+                load_utilisateurs();
+                return;
             }
-            else
-                MonFormUtilisateur.Close();
+
+            lesutilisateurs.Clear();
+
+            string sql = "SELECT id, nom, prenom, pseudo, email, date_inscription FROM utilisateurs";
+
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+            MySqlDataReader rdr = cmd.ExecuteReader();
+
+            while (rdr.Read())
+            {
+                Utilisateurs UtilisateursView = new Utilisateurs(int.Parse(rdr[0].ToString()), rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), rdr[4].ToString(), DateTime.Parse(rdr[5].ToString()));
+                lesutilisateurs.Add(UtilisateursView);
+            }
+            rdr.Close();
+
+            dataGridViewUsers.DataSource = null;
+            dataGridViewUsers.DataSource = lesutilisateurs;
+        }
+
+        private void dataGridViewUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
-    }
-
+}

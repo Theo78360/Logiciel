@@ -8,33 +8,40 @@ namespace Admin
 {
     static class Program
     {
-        /// <summary>
-        /// Point d'entrée principal de l'application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Login MonFormLogin = new Login();
 
+            Admin FormAdmin = null;
+
+            Operateurs FormOperateur = null;
+
             MonFormLogin.ShowDialog();
+
             if (MonFormLogin.DialogResult == DialogResult.OK)
             {
-                //On récupére les infos de l'utilisateur : ID, nom, niveau
-                String NiveauUtilisateur = MonFormLogin.StrLevel;
-                String LeNomutilisateur = MonFormLogin.NomUtilisateur;
-                
-                MonFormLogin.Close();//On ferme le login
-                Application.Run(new Admin(NiveauUtilisateur, LeNomutilisateur));//Lancer l'écran métier
-                                                                                //En foncton du niveau d'utilisateur, on ouvre un écran ou un autre
+                MonFormLogin.Close();
 
+                if (MonFormLogin.lvl == 1)
+                {
+                    FormAdmin = new Admin();
+                    FormAdmin.ShowDialog();
+                }
+                else if (MonFormLogin.lvl == 0)
+                {
+                    FormOperateur = new Operateurs();
+                    FormOperateur.ShowDialog();
+                }
             }
             else
+            {
                 MonFormLogin.Close();
-            MessageBox.Show("Au revoir");
-
-       
+                MessageBox.Show("A bientôt !");
+            }
         }
     }
 }

@@ -29,77 +29,77 @@ namespace Admin
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.ltb = new System.Windows.Forms.TextBox();
-            this.mtb = new System.Windows.Forms.TextBox();
-            this.bta = new System.Windows.Forms.Button();
-            this.btv = new System.Windows.Forms.Button();
+            this.labelPseudo = new System.Windows.Forms.Label();
+            this.labelPassword = new System.Windows.Forms.Label();
+            this.tbPseudo = new System.Windows.Forms.TextBox();
+            this.tbPassword = new System.Windows.Forms.TextBox();
+            this.buttonC = new System.Windows.Forms.Button();
+            this.buttonLogin = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // labelPseudo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(170, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(33, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Login";
+            this.labelPseudo.AutoSize = true;
+            this.labelPseudo.Location = new System.Drawing.Point(170, 99);
+            this.labelPseudo.Name = "labelPseudo";
+            this.labelPseudo.Size = new System.Drawing.Size(43, 13);
+            this.labelPseudo.TabIndex = 0;
+            this.labelPseudo.Text = "Pseudo";
             // 
-            // label2
+            // labelPassword
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 160);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Mot de passe";
+            this.labelPassword.AutoSize = true;
+            this.labelPassword.Location = new System.Drawing.Point(170, 160);
+            this.labelPassword.Name = "labelPassword";
+            this.labelPassword.Size = new System.Drawing.Size(71, 13);
+            this.labelPassword.TabIndex = 1;
+            this.labelPassword.Text = "Mot de passe";
             // 
-            // ltb
+            // tbPseudo
             // 
-            this.ltb.Location = new System.Drawing.Point(316, 92);
-            this.ltb.Name = "ltb";
-            this.ltb.Size = new System.Drawing.Size(138, 20);
-            this.ltb.TabIndex = 2;
+            this.tbPseudo.Location = new System.Drawing.Point(316, 92);
+            this.tbPseudo.Name = "tbPseudo";
+            this.tbPseudo.Size = new System.Drawing.Size(138, 20);
+            this.tbPseudo.TabIndex = 2;
             // 
-            // mtb
+            // tbPassword
             // 
-            this.mtb.Location = new System.Drawing.Point(316, 157);
-            this.mtb.Name = "mtb";
-            this.mtb.Size = new System.Drawing.Size(138, 20);
-            this.mtb.TabIndex = 3;
+            this.tbPassword.Location = new System.Drawing.Point(316, 157);
+            this.tbPassword.Name = "tbPassword";
+            this.tbPassword.Size = new System.Drawing.Size(138, 20);
+            this.tbPassword.TabIndex = 3;
             // 
-            // bta
+            // buttonC
             // 
-            this.bta.Location = new System.Drawing.Point(173, 225);
-            this.bta.Name = "bta";
-            this.bta.Size = new System.Drawing.Size(75, 23);
-            this.bta.TabIndex = 4;
-            this.bta.Text = "Annuler";
-            this.bta.UseVisualStyleBackColor = true;
-            this.bta.Click += new System.EventHandler(this.bta_Click);
+            this.buttonC.Location = new System.Drawing.Point(173, 225);
+            this.buttonC.Name = "buttonC";
+            this.buttonC.Size = new System.Drawing.Size(75, 23);
+            this.buttonC.TabIndex = 4;
+            this.buttonC.Text = "Annuler";
+            this.buttonC.UseVisualStyleBackColor = true;
+            this.buttonC.Click += new System.EventHandler(this.buttonC_Click);
             // 
-            // btv
+            // buttonLogin
             // 
-            this.btv.Location = new System.Drawing.Point(379, 225);
-            this.btv.Name = "btv";
-            this.btv.Size = new System.Drawing.Size(75, 23);
-            this.btv.TabIndex = 5;
-            this.btv.Text = "Valider";
-            this.btv.UseVisualStyleBackColor = true;
-            this.btv.Click += new System.EventHandler(this.btv_Click);
+            this.buttonLogin.Location = new System.Drawing.Point(379, 225);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(75, 23);
+            this.buttonLogin.TabIndex = 5;
+            this.buttonLogin.Text = "Valider";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(603, 450);
-            this.Controls.Add(this.btv);
-            this.Controls.Add(this.bta);
-            this.Controls.Add(this.mtb);
-            this.Controls.Add(this.ltb);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.buttonLogin);
+            this.Controls.Add(this.buttonC);
+            this.Controls.Add(this.tbPassword);
+            this.Controls.Add(this.tbPseudo);
+            this.Controls.Add(this.labelPassword);
+            this.Controls.Add(this.labelPseudo);
             this.Name = "Login";
             this.Text = "Bienvenue";
             this.ResumeLayout(false);
@@ -109,12 +109,12 @@ namespace Admin
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox ltb;
-        private System.Windows.Forms.TextBox mtb;
-        private System.Windows.Forms.Button bta;
-        private System.Windows.Forms.Button btv;
+        private System.Windows.Forms.Label labelPseudo;
+        private System.Windows.Forms.Label labelPassword;
+        private System.Windows.Forms.TextBox tbPseudo;
+        private System.Windows.Forms.TextBox tbPassword;
+        private System.Windows.Forms.Button buttonC;
+        private System.Windows.Forms.Button buttonLogin;
     }
 }
 

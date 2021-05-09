@@ -13,68 +13,61 @@ namespace Admin
 {
     public partial class Login : Form
     {
-        string _connectionString = "server=127.0.0.1;user id = root; persistsecurityinfo=True;database=ppe";
-        public String StrLevel = "Inconnu";
-        public String NomUtilisateur = "Inconnu";
         public Login()
         {
             InitializeComponent();
         }
 
-        private void bta_Click(object sender, EventArgs e)
+        public int lvl = 1;
+
+        string connectBDD = "server=localhost; user id=root; database=villiers";
+
+        private void buttonC_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
         }
 
-        private void btv_Click(object sender, EventArgs e)
+        private void buttonLogin_Click(object sender, EventArgs e)
         {
 
 
-            if (ltb.Text == "" || mtb.Text == "")
+            if (tbPseudo.Text == "" || tbPassword.Text == "")
             {
-                MessageBox.Show("Les champs sont vides!");
+                MessageBox.Show("Veuillez compléter tous les champs !");
                 return;
             }
-
-            try
+            else
             {
-
-                string idu = "";
-                string nom = "";
-                string motdepasse = "";
-                string lvl = "";
-
-                MySqlConnection conn = new MySqlConnection(_connectionString);
-                conn.Open();
-
-                nom = ltb.Text;
-                motdepasse = (SHA.petitsha(mtb.Text));
-
-                string sql = $"SELECT idu, nom, lvl FROM user WHERE nom = '{nom}' AND mdp = '{motdepasse}'";
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
-                MySqlDataReader rdr = cmd.ExecuteReader();
-                if (rdr.HasRows)
+                try
                 {
-                    while (rdr.Read())
+                    string pseudo = tbPseudo.Text;
+                    string motdepasse = (SHA.petitsha(tbPassword.Text));
+
+                    MySqlConnection conn = new MySqlConnection(connectBDD);
+                    conn.Open();
+
+                    string sql = $"SELECT id, pseudo, motdepasse, lvl FROM utilisateurs WHERE pseudo = '{pseudo}' AND motdepasse = '{motdepasse}'";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlDataReader rdr = cmd.ExecuteReader();
+
+                    if (rdr.Read())
                     {
-                        idu = rdr[0].ToString();
-                        nom = rdr[1].ToString();
-                        lvl = rdr[2].ToString();
+                        lvl = int.Parse(rdr[0].ToString());
                         this.DialogResult = DialogResult.OK;
                     }
+                    else
+                    {
+                        MessageBox.Show("Identifians incorrects !");
+                        return;
+                    }
                 }
-                else MessageBox.Show("Identifiants incorrects");
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
         }
-
-
     }
 }
-    
-    
 

@@ -11,7 +11,6 @@ C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.pdb
 C:\Users\theol\source\repos\Admin\Admin\bin\Debug\MySql.Data.DLL
 C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.Admin.resources
 C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.csproj.CopyComplete
-C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.Utilisateur.resources
 C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.Salon.resources
 C:\Users\theol\source\repos\Admin\Admin\bin\Debug\BouncyCastle.Crypto.dll
 C:\Users\theol\source\repos\Admin\Admin\bin\Debug\Google.Protobuf.dll
@@ -36,3 +35,6 @@ C:\Users\theol\source\repos\Admin\Admin\bin\Debug\System.Buffers.xml
 C:\Users\theol\source\repos\Admin\Admin\bin\Debug\System.Memory.xml
 C:\Users\theol\source\repos\Admin\Admin\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\theol\source\repos\Admin\Admin\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.DeleteUser.resources
+C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.InsertUser.resources
+C:\Users\theol\source\repos\Admin\Admin\obj\Debug\Admin.UpdateUser.resources
